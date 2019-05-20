@@ -49,6 +49,7 @@
           <option value="100">View</option>
           <option value="200">Edit</option>
           <option value="300">Delete</option>
+          <option value="400">Create</option>
         </b-select>
       </b-field>
 

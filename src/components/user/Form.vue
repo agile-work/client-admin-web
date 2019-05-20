@@ -59,8 +59,8 @@
 
       <b-field label="Active" type="is-success">
         <b-select v-model="form.active" expanded>
-          <option value="true">Sim</option>
-          <option value="false">Não</option>
+          <option :value="true">Sim</option>
+          <option :value="false">Não</option>
         </b-select>
       </b-field>
 
