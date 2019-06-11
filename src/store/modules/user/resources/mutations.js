@@ -8,4 +8,7 @@ export default {
   setUserUpdated(state, payload) {
     state.userUpdated = payload
   },
+  setUserPermissions(state, payload) {
+    state.userPermissions = payload
+  },
 }

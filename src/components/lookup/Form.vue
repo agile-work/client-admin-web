@@ -21,6 +21,7 @@
         <b-select v-model="form.type" expanded>
           <option value="static">Estático</option>
           <option value="dynamic">Dinâmico</option>
+          <option value="tree">Árvore</option>
         </b-select>
       </b-field>
 

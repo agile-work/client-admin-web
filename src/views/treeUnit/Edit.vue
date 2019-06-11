@@ -54,6 +54,7 @@ export default {
         name: '',
         code: '',
         description: '',
+        permission_scope: '',
         tree_id: '',
         parent_id: '',
         active: false,
@@ -79,6 +80,7 @@ export default {
         this.form.name = treeUnit.name
         this.form.code = treeUnit.code
         this.form.description = treeUnit.description
+        this.form.permission_scope = treeUnit.permission_scope
         this.form.tree_id = treeUnit.tree_id
         this.form.parent_id = treeUnit.parent_id
         this.form.active = treeUnit.active

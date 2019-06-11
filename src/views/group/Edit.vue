@@ -62,6 +62,8 @@ export default {
         name: '',
         code: '',
         description: '',
+        tree_unit_id: null,
+        tree_unit_permission_scope: null,
         active: false,
       },
       activeTab: 0,
@@ -86,6 +88,8 @@ export default {
         this.form.name = group.name
         this.form.code = group.code
         this.form.description = group.description
+        this.form.tree_unit_id = group.tree_unit_id
+        this.form.tree_unit_permission_scope = group.tree_unit_permission_scope
         this.form.active = group.active
       }
     },

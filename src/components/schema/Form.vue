@@ -24,6 +24,17 @@
         </b-select>
       </b-field>
 
+      <b-field label="Master:">
+        <b-input v-model="form.parent_id" />
+      </b-field>
+
+      <b-field label="Extension" type="is-success">
+        <b-select v-model="form.is_extension" expanded>
+          <option :value="true">Sim</option>
+          <option :value="false">Não</option>
+        </b-select>
+      </b-field>
+
       <b-field label="Active" type="is-success">
         <b-select v-model="form.active" expanded>
           <option :value="true">Sim</option>
@@ -52,6 +63,8 @@ export default {
           code: '',
           description: '',
           module: false,
+          parent_id: '',
+          is_extension: false,
           active: false,
         }
       },

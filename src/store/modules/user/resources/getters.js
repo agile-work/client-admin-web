@@ -8,4 +8,7 @@ export default {
   userUpdated: (state) => {
     return state.userUpdated
   },
+  userPermissions: (state) => {
+    return state.userPermissions
+  },
 }

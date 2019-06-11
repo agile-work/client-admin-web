@@ -31,6 +31,9 @@
       <b-tab-item class="card hero" label="Groups">
         <UserGroupList></UserGroupList>
       </b-tab-item>
+      <b-tab-item class="card hero" label="Permissions">
+        <UserPermissionList></UserPermissionList>
+      </b-tab-item>
     </b-tabs>
     <b-loading
       :is-full-page="true"
@@ -43,12 +46,14 @@
 <script>
 import UserForm from '@/components/user/Form.vue'
 import UserGroupList from '@/views/userGroup/List.vue'
+import UserPermissionList from '@/views/userPermission/List.vue'
 
 export default {
   name: 'UserEdit',
   components: {
     UserForm,
     UserGroupList,
+    UserPermissionList,
   },
   data() {
     return {

@@ -27,7 +27,7 @@
         <LookupForm :form="form" @formToParent="submit" />
       </div>
     </template>
-    <template v-if="form.type === 'static'">
+    <template v-if="form.type !== 'dynamic'">
       <b-tabs v-model="activeTab" type="is-boxed" position="is-centered">
         <b-tab-item class="card hero" label="Lookup">
           <div class="column">

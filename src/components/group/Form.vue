@@ -17,6 +17,18 @@
         <b-input v-model="form.description" type="textarea" />
       </b-field>
 
+      <b-field label="Unidade de árvore:">
+        <b-input v-model="form.tree_unit_id" />
+      </b-field>
+
+      <b-field label="Escopo da permissão da unidade" type="is-success">
+        <b-select v-model="form.tree_unit_permission_scope" expanded>
+          <option :value="null"></option>
+          <option value="unit_only">Somente a unidade</option>
+          <option value="unit_and_descendent">Unidade e descendentes</option>
+        </b-select>
+      </b-field>
+
       <b-field label="Active" type="is-success">
         <b-select v-model="form.active" expanded>
           <option :value="true">Sim</option>
@@ -44,6 +56,8 @@ export default {
           name: '',
           code: '',
           description: '',
+          tree_unit_id: null,
+          tree_unit_permission_scope: null,
           active: false,
         }
       },

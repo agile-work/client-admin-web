@@ -30,86 +30,99 @@
         :bordered="true"
       >
         <template slot-scope="props">
-          <b-table-column field="id" label="ID" width="90" sortable>
+          <b-table-column
+            field="structure_id"
+            label="Structure ID"
+            width="125"
+            sortable
+          >
             <vm-popover
               ref="popover"
               trigger="hover"
               placement="top"
-              :content="props.row.id"
-            >
-            </vm-popover>
-            <div v-popover:popover v-line-clamp:20="1">{{ props.row.id }}</div>
-          </b-table-column>
-
-          <b-table-column field="username" label="Username" sortable>
-            <vm-popover
-              ref="popover"
-              trigger="hover"
-              placement="top"
-              :content="props.row.username"
+              :content="props.row.structure_id"
             >
             </vm-popover>
             <div v-popover:popover v-line-clamp:20="1">
-              {{ props.row.username }}
+              {{ props.row.structure_id }}
             </div>
           </b-table-column>
 
-          <b-table-column field="first_name" label="First Name" sortable>
+          <b-table-column
+            field="structure_type"
+            label="Structure Type"
+            width="135"
+            sortable
+          >
             <vm-popover
               ref="popover"
               trigger="hover"
               placement="top"
-              :content="props.row.first_name"
+              :content="props.row.structure_type"
             >
             </vm-popover>
             <div v-popover:popover v-line-clamp:20="1">
-              {{ props.row.first_name }}
+              {{ props.row.structure_type }}
             </div>
           </b-table-column>
 
-          <b-table-column field="last_name" label="Last Name" sortable>
+          <b-table-column
+            field="structure_name"
+            label="Structure Name"
+            sortable
+          >
             <vm-popover
               ref="popover"
               trigger="hover"
               placement="top"
-              :content="props.row.last_name"
+              :content="props.row.structure_name"
             >
             </vm-popover>
             <div v-popover:popover v-line-clamp:20="1">
-              {{ props.row.last_name }}
+              {{ props.row.structure_name }}
             </div>
           </b-table-column>
 
-          <b-table-column label="Active" width="100" sortable centered>
-            <b-icon pack="fas" :icon="props.row.active ? 'check' : ''" />
+          <b-table-column field="schema_name" label="Schema" sortable>
+            <vm-popover
+              ref="popover"
+              trigger="hover"
+              placement="top"
+              :content="props.row.schema_name"
+            >
+            </vm-popover>
+            <div v-popover:popover v-line-clamp:20="1">
+              {{ props.row.schema_name }}
+            </div>
           </b-table-column>
 
-          <b-table-column field="actions" label="Actions" width="90" centered>
-            <div class="buttons">
-              <b-button
-                type="is-danger"
-                size="is-small"
-                @click.prevent="openModalDelete(props.row.id)"
-              >
-                <b-icon pack="fas" icon="trash-alt" />
-              </b-button>
+          <b-table-column field="permission_type" label="Permission" sortable>
+            <vm-popover
+              ref="popover"
+              trigger="hover"
+              placement="top"
+              :content="props.row.permission_type.toString()"
+            >
+            </vm-popover>
+            <div v-popover:popover v-line-clamp:20="1">
+              {{ props.row.permission_type.toString() }}
+            </div>
+          </b-table-column>
+
+          <b-table-column field="scope" label="Scope" sortable>
+            <vm-popover
+              ref="popover"
+              trigger="hover"
+              placement="top"
+              :content="props.row.scope"
+            >
+            </vm-popover>
+            <div v-popover:popover v-line-clamp:20="1">
+              {{ props.row.scope }}
             </div>
           </b-table-column>
         </template>
       </b-table>
-      <router-link
-        class="button is-success"
-        :to="`/admin/groups/${groupID}/users/add`"
-      >
-        Add Group
-      </router-link>
-      <b-modal :active.sync="isModalDelete" has-modal-card>
-        <modal-yes-no
-          :message="'Are you sure you want to delete this record?'"
-          :data="{ group_id: groupID, user_id: userID }"
-          :method="removeUser"
-        ></modal-yes-no>
-      </b-modal>
       <b-loading
         :is-full-page="true"
         :active.sync="loading"
@@ -120,13 +133,8 @@
 </template>
 
 <script>
-import ModalYesNo from '@/components/modal/YesNo.vue'
-
 export default {
-  name: 'GroupUserList',
-  components: {
-    ModalYesNo,
-  },
+  name: 'UserPermissionList',
   data() {
     return {
       data: [],
@@ -135,9 +143,7 @@ export default {
       defaultSortDirection: 'asc',
       currentPage: 1,
       perPage: 10,
-      isModalDelete: false,
-      groupID: this.$route.params.group_id,
-      userID: null,
+      userID: this.$route.params.user_id,
     }
   },
   computed: {
@@ -147,33 +153,25 @@ export default {
     loading() {
       return this.$store.getters.loading > 0
     },
+    dataStore() {
+      return this.$store.getters['user/userPermissions']
+    },
+  },
+  watch: {
+    dataStore() {
+      this.data = this.$store.getters['user/userPermissions']
+    },
   },
   mounted() {
-    this.getUsers(this.groupID)
+    this.getUserPermissions(this.userID)
   },
   methods: {
-    async getUsers(groupID) {
+    async getUserPermissions(userID) {
       try {
-        const users = await this.$store.dispatch('group/getUsers', groupID)
-        this.data = users.data
+        await this.$store.dispatch('user/getUserPermissions', userID)
       } catch (err) {
         console.log(err)
       }
-    },
-    async removeUser(payload) {
-      this.isModalDelete = true
-      if (payload) {
-        try {
-          await this.$store.dispatch('group/removeUser', payload)
-          this.getUsers(this.groupID)
-        } catch (err) {
-          console.log(err)
-        }
-      }
-    },
-    openModalDelete(userID) {
-      this.userID = userID
-      this.isModalDelete = true
     },
   },
 }

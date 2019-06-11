@@ -9,6 +9,7 @@ import {
   addGroup,
   removeGroup,
   getActiveUsers,
+  getUserPermissions,
 } from '../../../../services/user'
 
 const inRoot = {
@@ -197,6 +198,22 @@ export default {
         commit('clearError', null, inRoot)
         const response = await getActiveUsers()
         // commit('setUsers', response.data)
+        resolve(response)
+      } catch (err) {
+        reject(err)
+        commit('error', err, inRoot)
+      } finally {
+        commit('loaded', null, inRoot)
+      }
+    })
+  },
+  getUserPermissions({ commit }, payload) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        commit('loading', null, inRoot)
+        commit('clearError', null, inRoot)
+        const response = await getUserPermissions(payload)
+        commit('setUserPermissions', response.data)
         resolve(response)
       } catch (err) {
         reject(err)

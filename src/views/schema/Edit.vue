@@ -67,6 +67,8 @@ export default {
         name: '',
         code: '',
         description: '',
+        parent_id: '',
+        is_extension: false,
         module: true,
         active: false,
       },
@@ -93,6 +95,8 @@ export default {
         this.form.code = schema.code
         this.form.description = schema.description
         this.form.module = schema.module
+        this.form.parent_id = schema.parent_id
+        this.form.is_extension = schema.is_extension
         this.form.active = schema.active
       }
     },

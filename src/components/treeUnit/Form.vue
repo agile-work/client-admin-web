@@ -17,6 +17,14 @@
         <b-input v-model="form.description" type="textarea" />
       </b-field>
 
+      <b-field label="Escopo da permissão da unidade" type="is-success">
+        <b-select v-model="form.permission_scope" expanded>
+          <option :value="null"></option>
+          <option value="unit_only">Somente a unidade</option>
+          <option value="unit_and_descendent">Unidade e descendentes</option>
+        </b-select>
+      </b-field>
+
       <b-field label="Active" type="is-success">
         <b-select v-model="form.active" expanded>
           <option :value="true">Sim</option>
@@ -43,6 +51,7 @@ export default {
           name: '',
           code: '',
           description: '',
+          permission_scope: '',
           tree_id: this.$route.params.tree_id,
           parent_id: '',
           active: false,

@@ -107,7 +107,7 @@
             </div>
           </b-table-column>
 
-          <b-table-column label="Active" sortable centered>
+          <b-table-column label="Active" width="100" sortable centered>
             <b-icon pack="fas" :icon="props.row.active ? 'check' : ''" />
           </b-table-column>
 

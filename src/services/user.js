@@ -104,3 +104,14 @@ export const getActiveUsers = () => {
     }
   })
 }
+
+export const getUserPermissions = (user_id) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await axios.get(`/users/${user_id}/permissions`)
+      resolve(response.data)
+    } catch (err) {
+      reject(err)
+    }
+  })
+}

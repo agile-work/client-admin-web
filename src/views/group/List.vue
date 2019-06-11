@@ -81,7 +81,43 @@
             </div>
           </b-table-column>
 
-          <b-table-column label="Active" sortable centered>
+          <b-table-column
+            field="tree_unit_id"
+            label="Tree Unit"
+            width="100"
+            sortable
+          >
+            <vm-popover
+              ref="popover"
+              trigger="hover"
+              placement="top"
+              :content="props.row.tree_unit_id"
+            >
+            </vm-popover>
+            <div v-popover:popover v-line-clamp:20="1">
+              {{ props.row.tree_unit_id }}
+            </div>
+          </b-table-column>
+
+          <b-table-column
+            field="tree_unit_permission_scope"
+            label="Tree Unit Permission Scope"
+            width="230"
+            sortable
+          >
+            <vm-popover
+              ref="popover"
+              trigger="hover"
+              placement="top"
+              :content="props.row.tree_unit_permission_scope"
+            >
+            </vm-popover>
+            <div v-popover:popover v-line-clamp:20="1">
+              {{ props.row.tree_unit_permission_scope }}
+            </div>
+          </b-table-column>
+
+          <b-table-column label="Active" width="100" sortable centered>
             <b-icon pack="fas" :icon="props.row.active ? 'check' : ''" />
           </b-table-column>
 

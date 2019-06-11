@@ -28,14 +28,8 @@
       </b-field>
 
       <template v-if="showLookupList">
-        <b-field label="Lookup" type="is-success">
-          <b-select v-model="form.lookup_id" expanded>
-            <option value="text">Text</option>
-            <option value="integer">Integer</option>
-            <option value="decimal">Decimal</option>
-            <option value="lookup">Lookup</option>
-            <option value="widget">Widget</option>
-          </b-select>
+        <b-field label="Lookup:">
+          <b-input v-model="form.lookup_id" />
         </b-field>
 
         <b-field label="Multivalue" type="is-success">
